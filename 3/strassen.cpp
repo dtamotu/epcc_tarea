@@ -106,7 +106,7 @@ void printMatrix(const vector<vector<int>>& matrix) {
 }
 
 int main() {
-    /*     vector<vector<int>> A = {{1, 2, 3, 4},
+        vector<vector<int>> A = {{1, 2, 3, 4},
                                  {5, 6, 7, 8},
                                  {9, 10, 11, 12},
                                  {13, 14, 15, 16}};
@@ -114,10 +114,10 @@ int main() {
         vector<vector<int>> B = {{1, 0, 0, 0},
                                  {0, 1, 0, 0},
                                  {0, 0, 1, 0},
-                                 {0, 0, 0, 1}}; */
+                                 {0, 0, 0, 1}};
 
-    vector<vector<int>> A = { {1,2},{3,4} };
-    vector<vector<int>> B = { {1,0},{0,1} };
+/*     vector<vector<int>> A = { {1,2},{3,4} };
+    vector<vector<int>> B = { {1,0},{0,1} }; */
     vector<vector<int>> result = strassen(A, B);
 
     printMatrix(result);
