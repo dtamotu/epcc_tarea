@@ -69,7 +69,7 @@ int main() {
             cout << 0 << endl;
         }
         else {
-            cout << result.size() << endl;
+            cout << result.size() << endl<<endl;
             for (const auto& segment : result) {
                 cout << segment.first << " " << segment.second << endl;
             }
