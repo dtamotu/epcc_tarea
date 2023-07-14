@@ -16,16 +16,16 @@ bool compareX(Point a, Point b) {
 }
 
 //distancia euclidiana
-double distance(Point p1, Point p2) {
+float distance(Point p1, Point p2) {
     return sqrt(pow(p1.first - p2.first, 2) + pow(p1.second - p2.second, 2));
 }
 
 //resolviendo el problema más pequeño
-double bruteForce(vector<Point>& P, int start, int end) {
-    double minDist = 999999;
+float bruteForce(vector<Point>& P, int start, int end) {
+    float minDist = 999999;
     for (int i = start; i <= end; i++) {
         for (int j = i + 1; j <= end; j++) {
-            double dist = distance(P[i], P[j]);
+            float dist = distance(P[i], P[j]);
             if (dist < minDist) {
                 minDist = dist;
             }
@@ -34,13 +34,13 @@ double bruteForce(vector<Point>& P, int start, int end) {
     return minDist;
 }
 
-double stripClosest(vector<Point>& strip, double d) {
-    double minDist = d;
+float stripClosest(vector<Point>& strip, float d) {
+    float minDist = d;
     sort(strip.begin(), strip.end(), compareY);
     int n = strip.size();
     for (int i = 0; i < n; i++) {
         for (int j = i + 1; j < n && (strip[j].second - strip[i].second) < minDist; j++) {
-            double dist = distance(strip[i], strip[j]);
+            float dist = distance(strip[i], strip[j]);
             if (dist < minDist) {
                 minDist = dist;
             }
@@ -49,7 +49,7 @@ double stripClosest(vector<Point>& strip, double d) {
     return minDist;
 }
 
-double closestRecursive(vector<Point>& P, int start, int end) {
+float closestRecursive(vector<Point>& P, int start, int end) {
     int n = end - start + 1;
     if (n <= 3) {
         return bruteForce(P, start, end);
@@ -58,9 +58,9 @@ double closestRecursive(vector<Point>& P, int start, int end) {
     int mid = (start + end) / 2;
     Point midPoint = P[mid];
 
-    double dl = closestRecursive(P, start, mid);
-    double dr = closestRecursive(P, mid + 1, end);
-    double d = min(dl, dr);
+    float dl = closestRecursive(P, start, mid);
+    float dr = closestRecursive(P, mid + 1, end);
+    float d = min(dl, dr);
 
     vector<Point> strip;
     for (int i = start; i <= end; i++) {
@@ -69,7 +69,7 @@ double closestRecursive(vector<Point>& P, int start, int end) {
         }
     }
 
-    double stripDist = stripClosest(strip, d);
+    float stripDist = stripClosest(strip, d);
     return min(d, stripDist);
 }
 
@@ -78,7 +78,7 @@ void closedistance(vector<Point>& points) {
     sort(points.begin(), points.end(), compareX);
     float minDistance= closestRecursive(points, 0, n - 1);
 
-    if(minDistance<=10000)
+    if(minDistance<10000)
         cout<<minDistance<<endl;
     else
         cout<<"INFINITY"<<endl;
