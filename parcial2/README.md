@@ -1,5 +1,12 @@
 
-A) Mediana
+A Mediana
+
 ![EjercicioA](A.png)
-D) Cobertura mínima
+
+B Par más cercano
+
+![Alt text](B.png)
+
+D Cobertura mínima
+
 ![Alt text](image.png)
