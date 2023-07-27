@@ -6,9 +6,13 @@ Enunciado
 
 ![Alt text](md.png)
 
-En la salida se puede apreciar que utliza el 1ro y 3er  peso, obteniendo un beneficio optimo de 4+2, que es 6.
-
-¿Cuánto será el tiempo de recomponer la solución?
+![Alt text](m.png)
 
 Problema del cambio de monedas
+
+![Alt text](monedasE.png)
+
+![Alt text](monedas.png)
+
+![Alt text](c.png)
 

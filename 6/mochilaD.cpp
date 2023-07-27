@@ -4,8 +4,6 @@
 using namespace std;
 
 int mochila(int n, int M, const vector<int>& bi, const vector<int>& pi, vector<vector<int>>& V) {
-
-
     for (int i = 1; i <= n; ++i) {
         for (int j = 1; j <= M; ++j) {
            if (j - pi[i-1] < 0)
@@ -20,13 +18,10 @@ int mochila(int n, int M, const vector<int>& bi, const vector<int>& pi, vector<v
         }
         cout << endl;
     }
-
-
     return V[n][M];
 }
 void recomponer( int n, int M, const vector<int>& pi, vector<vector<int>>& V)
 {
-
     int j = M;
     vector<int>x(3, 0);
     for (int i = n; i >= 1; i--)
@@ -39,13 +34,9 @@ void recomponer( int n, int M, const vector<int>& pi, vector<vector<int>>& V)
             j = j - pi[i-1];
         }
     }
-
-
-   
     for (int i = 0; i < n; i++) {
         cout << x[i] << " , "<<pi[i]<<endl;
     }
-
 }
 
 int main() {

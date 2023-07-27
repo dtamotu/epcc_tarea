@@ -1,62 +1,69 @@
-#include<iostream>
+#include <iostream>
+#include <vector>
 #include <cmath>
-
+#include <climits>
 using namespace std;
-int M=6;
-int const tam_p=3;
-int const p[tam_p]={2,3,4};
 
-int const tam_b=3;
-int b[tam_b]={1,2,5};
+int cambiomonedas(int n, int P, const vector<int>& Ci, vector<vector<int>>& D) {
 
-int const tam_mochi=6;
-int V[tam_p+1][tam_mochi+1];
 
-void caso_base(){
-    for(int i=0;i<=tam_p;i++){
-        for(int j=0;j<=tam_b;j++){
-            V[i][j]=0;
+    for (int i = 1; i <= n; ++i) {
+        for (int j = 1; j <= P; ++j) {
+            if (i - 1 == 0)
+            {
+                D[i - 1][j] = 1 + D[i - 1][j - Ci[i - 1]];
+            }
+            else
+            {
+                if (j - Ci[i - 1] < 0)
+                    D[i - 1][j] = D[i - 1-1][j];
+                else
+                    D[i - 1][j] = min(D[i - 1-1][j], 1 + D[i - 1][j - Ci[i - 1]]);
+            }
+
         }
     }
+       for (int i = 0; i < n; i++) {
+        for (int j = 0; j <= P; j++) {
+            cout << D[i][j] << " ";
+        }
+        cout << endl;
+    } 
+
+    return D[n-1][P];
 }
-void recomponer()
+void recomponer(int n, int P, const vector<int>& Ci, vector<vector<int>>& D)
 {
-    int j=M;
-    int x[tam_p];
-    for(int i=tam_p; i>=1;i--)
+    int i = n;
+    int j = P;
+    vector<int>x(n, 0);
+    for (;i != 0&&j!=0;)
     {
-        if(V[i][j]==V[i-1][j])
-            x[i]=0;
+        if (D[i-1][j] == D[i - 1-1][j])
+            i=i- 1;
         else
         {
-            x[i]=1;
-            j=j-p[i];
+            x[i-1] = x[i-1]+1;
+            j = j - Ci[i-1];
         }
     }
-    for(int i=0; i<tam_p;i++){
-        cout<<x[i]<<" ";
-    }
-}
-int main()
-{
-     
-    for(int i=1;i<=tam_p;i++){
-        for(int j=1;j<=M;j++){
-            if(j-p[(i-1)]<0)
-                V[i][j]=V[i-1][j];
-            else
-                V[i][j]=max(V[i-1][j], b[(i-1)]+V[i-1][j-p[(i-1)]]);
-            
-        }
-    }
-   
-   for(int i=0;i<=tam_p;i++){
-        for(int j=0;j<=M;j++){
-            cout<<V[i][j]<<" ";
-        }
-        cout<<endl;
-    }
-    recomponer();
-    return 0;
-} 
 
+    for (int i = 0; i < n; i++) {
+        cout << x[i] << " , " << Ci[i] << endl;
+    }
+
+}
+
+int main() {
+    int n = 3;
+    int P = 8;
+    vector<int> c = { 1, 4, 6 };
+    vector<vector<int>> D(n, vector<int>(P + 1, 0));
+
+    cambiomonedas(n, P, c, D);
+    //int beneficio_optimo = mochila(n, M, b, p, V);
+    //cout << "El beneficio optimo es: " << beneficio_optimo << endl;
+    recomponer(n, P, c, D);
+
+    return 0;
+}
