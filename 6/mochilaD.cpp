@@ -1,66 +1,62 @@
-#include<iostream>
+#include <iostream>
+#include <vector>
 #include <cmath>
-
 using namespace std;
-int M=6;
-int const tam_p=3;
-int const p[tam_p]={2,3,4};
 
-int const tam_b=3;
-int b[tam_b]={1,2,5};
+int mochila(int n, int M, const vector<int>& bi, const vector<int>& pi, vector<vector<int>>& V) {
 
-int const tam_mochi=6;
-int V[tam_p+1][tam_mochi+1];
 
-void caso_base(){
-    for(int i=0;i<=tam_p;i++){
-        for(int j=0;j<=tam_b;j++){
-            /*if(i==0)
-                V[0][j]=0;
-            if(j==0)
-                V[0][j]=0;*/
-            V[i][j]=0;
+    for (int i = 1; i <= n; ++i) {
+        for (int j = 1; j <= M; ++j) {
+           if (j - pi[i-1] < 0)
+               V[i][j] = V[i - 1][j];
+           else
+                V[i][j] = max(V[i - 1][j], bi[i-1] + V[i - 1][j - pi[i-1]]);
         }
     }
+    for (int i = 0; i <= n; i++) {
+        for (int j = 0; j <= M; j++) {
+            cout << V[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+
+    return V[n][M];
 }
-void recomponer()
+void recomponer( int n, int M, const vector<int>& pi, vector<vector<int>>& V)
 {
-    int j=M;
-    int x[tam_p];
-    for(int i=tam_p; i>=1;i--)
+
+    int j = M;
+    vector<int>x(3, 0);
+    for (int i = n; i >= 1; i--)
     {
-        if(V[i][j]==V[i-1][j])
-            x[i]=0;
+        if (V[i][j] == V[i - 1][j])
+            x[i-1] = 0;
         else
         {
-            x[i]=1;
-            j=j-p[i];
+            x[i-1] = 1;
+            j = j - pi[i-1];
         }
     }
-    for(int i=0; i<tam_p;i++){
-        cout<<x[i]<<" ";
-    }
-}
-int main()
-{
-     
-    for(int i=1;i<=tam_p;i++){
-        for(int j=1;j<=M;j++){
-            if(j-p[(i-1)]<0)
-                V[i][j]=V[i-1][j];
-            else
-                V[i][j]=max(V[i-1][j], b[(i-1)]+V[i-1][j-p[(i-1)]]);
-            
-        }
-    }
-   
-   for(int i=0;i<=tam_p;i++){
-        for(int j=0;j<=M;j++){
-            cout<<V[i][j]<<" ";
-        }
-        cout<<endl;
-    }
-    recomponer();
-    return 0;
-} // namespace std
 
+
+   
+    for (int i = 0; i < n; i++) {
+        cout << x[i] << " , "<<pi[i]<<endl;
+    }
+
+}
+
+int main() {
+    int n = 3;
+    int M = 6;
+    vector<int> b = { 1, 2, 5 };
+    vector<int> p = { 2, 3, 4 };
+    vector<vector<int>> V(n+1, vector<int>(M+1, 0));
+    int beneficio_optimo = mochila(n, M, b, p, V);
+    cout << "El beneficio optimo es: " << beneficio_optimo << endl;
+    recomponer(n,M,p,V);
+
+    return 0;
+}

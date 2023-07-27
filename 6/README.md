@@ -4,7 +4,7 @@ Enunciado
 
 ![Alt text](mochilaE.png)
 
-![Alt text](mochilaD.png)
+![Alt text](md.png)
 
 En la salida se puede apreciar que utliza el 1ro y 3er  peso, obteniendo un beneficio optimo de 4+2, que es 6.
 
