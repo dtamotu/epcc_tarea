@@ -1,18 +1,6 @@
 
-Problema de la mochila
-Enunciado
+Problema de la Mochila Backtracking usando árbol binomial
 
-![Alt text](mochilaE.png)
 
-![Alt text](md.png)
 
-![Alt text](m.png)
-
-Problema del cambio de monedas
-
-![Alt text](monedasE.png)
-
-![Alt text](monedas.png)
-
-![Alt text](c.png)
-
+Problema de la Mochila Backtracking usando árbol combinatorio
